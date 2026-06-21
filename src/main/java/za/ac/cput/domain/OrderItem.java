@@ -1,12 +1,12 @@
 package za.ac.cput.domain;
 
-/ OrderItem.java
+/* OrderItem.java
    OrderItem POJO class
 
    Author: Coben Maistry
 
    Date: 21 June 2026
-/
+*/
 
 public class OrderItem {
 
