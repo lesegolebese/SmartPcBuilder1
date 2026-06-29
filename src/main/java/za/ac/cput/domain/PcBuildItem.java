@@ -1,17 +1,20 @@
-/* PcBuildItem.java
-   PcBuildItem POJO entity implementing Builder Pattern
-   Author: Mnelsi Mabona (222062088)
-   Date: 21 June 2026
-*///
+/*
+ * PcBuildItem.java
+ * PcBuildItem POJO Entity implementing Builder Pattern
+ * Author: Mnelisi Mabona (222062088)
+ * Date: 27 June 2026
+ */
 
 package za.ac.cput.domain;
 
 public class PcBuildItem {
-    private String buildItemId;
+
+    private Long buildItemId;
     private int quantity;
     private Product product;
 
-    protected PcBuildItem() {}
+    protected PcBuildItem() {
+    }
 
     protected PcBuildItem(Builder builder) {
         this.buildItemId = builder.buildItemId;
@@ -19,7 +22,7 @@ public class PcBuildItem {
         this.product = builder.product;
     }
 
-    public String getBuildItemId() {
+    public Long getBuildItemId() {
         return buildItemId;
     }
 
@@ -34,18 +37,19 @@ public class PcBuildItem {
     @Override
     public String toString() {
         return "PcBuildItem{" +
-                "buildItemId='" + buildItemId + '\'' +
+                "buildItemId=" + buildItemId +
                 ", quantity=" + quantity +
                 ", product=" + product +
                 '}';
     }
 
     public static class Builder {
-        private String buildItemId;
+
+        private Long buildItemId;
         private int quantity;
         private Product product;
 
-        public Builder setBuildItemId(String buildItemId) {
+        public Builder setBuildItemId(Long buildItemId) {
             this.buildItemId = buildItemId;
             return this;
         }
@@ -71,4 +75,4 @@ public class PcBuildItem {
             return new PcBuildItem(this);
         }
     }
-} ////
+}

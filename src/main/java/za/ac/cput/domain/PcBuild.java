@@ -1,8 +1,9 @@
-/* PcBuild.java
-   PcBuild POJO entity implementing Builder Pattern
-   Author: Mnelsi Mabona (222062088)
-   Date: 21 June 2026
-*/
+/*
+ * PcBuild.java
+ * PcBuild POJO Entity implementing Builder Pattern
+ * Author: Mnelisi Mabona (222062088)
+ * Date: 27 June 2026
+ */
 
 package za.ac.cput.domain;
 
@@ -11,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PcBuild {
-    private String buildId;
+
+    private Long buildId;
     private String buildName;
     private LocalDate createdDate;
     private User user;
     private List<PcBuildItem> buildItems;
 
-    protected PcBuild() {}
+    protected PcBuild() {
+    }
 
     protected PcBuild(Builder builder) {
         this.buildId = builder.buildId;
@@ -29,7 +32,7 @@ public class PcBuild {
                 : new ArrayList<>();
     }
 
-    public String getBuildId() {
+    public Long getBuildId() {
         return buildId;
     }
 
@@ -52,7 +55,7 @@ public class PcBuild {
     @Override
     public String toString() {
         return "PcBuild{" +
-                "buildId='" + buildId + '\'' +
+                "buildId=" + buildId +
                 ", buildName='" + buildName + '\'' +
                 ", createdDate=" + createdDate +
                 ", user=" + user +
@@ -61,13 +64,14 @@ public class PcBuild {
     }
 
     public static class Builder {
-        private String buildId;
+
+        private Long buildId;
         private String buildName;
         private LocalDate createdDate;
         private User user;
         private List<PcBuildItem> buildItems;
 
-        public Builder setBuildId(String buildId) {
+        public Builder setBuildId(Long buildId) {
             this.buildId = buildId;
             return this;
         }
@@ -106,4 +110,3 @@ public class PcBuild {
         }
     }
 }
-////

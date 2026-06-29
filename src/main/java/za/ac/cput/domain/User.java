@@ -1,5 +1,5 @@
-/* User.java
-   User POJO entity implementing Builder Pattern
+/* UserFactory.java
+   UserFactory POJO entity implementing Builder Pattern
    Author: Lesego Lebese (222371196)
    Date: 21 June 2026 */
 
@@ -36,7 +36,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserFactory{" +
                 "userId='" + userId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +

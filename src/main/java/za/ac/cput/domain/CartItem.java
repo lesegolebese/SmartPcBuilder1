@@ -1,6 +1,6 @@
 /* CartItem.java
    CartItem POJO entity implementing Builder Pattern
-   Author: Lesego Lebese (YourStudentNumber)
+   Author: ofentse lebaka 221108785
    Date: 22 June 2026 */
 
 package za.ac.cput.domain;
