@@ -1,6 +1,6 @@
 /*
  * AdminFactory.java
- * Author: Lesego Lebese (222371196)
+ * Author: Matinisa Lubisi (222527269)
  * Date: 10 July 2026
  */
 package za.ac.cput.factory;
