@@ -10,7 +10,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Address;
 
-@Repository
-public interface IAddressRepository extends JpaRepository<Address, Long> {
+import java.util.List;
+import java.util.Optional;
 
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
+    // Custom query method example to find addresses by city
+    List<Address> findByCity(String city);
+
+    List<Address> findByPostalCode(String postalCode);
 }
