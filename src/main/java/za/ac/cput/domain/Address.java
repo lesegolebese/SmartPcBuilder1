@@ -5,18 +5,31 @@
 
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Addresses")
 public class Address {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
+
     private String streetName;
     private String suburb;
     private String city;
     private String province;
-    private String postalCode;
-    private String country;
+    private short postalCode; // Aligned with Short.parseShort() in factory
+    private String country;   // Included from factory signature
 
-    protected Address() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    protected Address(Builder builder) {
+    protected Address() {
+    }
+
+    private Address(Builder builder) {
         this.addressId = builder.addressId;
         this.streetName = builder.streetName;
         this.suburb = builder.suburb;
@@ -24,15 +37,18 @@ public class Address {
         this.province = builder.province;
         this.postalCode = builder.postalCode;
         this.country = builder.country;
+        this.user = builder.user;
     }
 
+    // GETTERS
     public Long getAddressId() { return addressId; }
     public String getStreetName() { return streetName; }
     public String getSuburb() { return suburb; }
     public String getCity() { return city; }
     public String getProvince() { return province; }
-    public String getPostalCode() { return postalCode; }
+    public short getPostalCode() { return postalCode; }
     public String getCountry() { return country; }
+    public User getUser() { return user; }
 
     @Override
     public String toString() {
@@ -42,7 +58,7 @@ public class Address {
                 ", suburb='" + suburb + '\'' +
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +
-                ", postalCode='" + postalCode + '\'' +
+                ", postalCode=" + postalCode +
                 ", country='" + country + '\'' +
                 '}';
     }
@@ -53,8 +69,9 @@ public class Address {
         private String suburb;
         private String city;
         private String province;
-        private String postalCode;
+        private short postalCode;
         private String country;
+        private User user;
 
         public Builder setAddressId(Long addressId) {
             this.addressId = addressId;
@@ -81,13 +98,18 @@ public class Address {
             return this;
         }
 
-        public Builder setPostalCode(String postalCode) {
+        public Builder setPostalCode(short postalCode) {
             this.postalCode = postalCode;
             return this;
         }
 
         public Builder setCountry(String country) {
             this.country = country;
+            return this;
+        }
+
+        public Builder setUser(User user) {
+            this.user = user;
             return this;
         }
 
@@ -99,6 +121,7 @@ public class Address {
             this.province = address.province;
             this.postalCode = address.postalCode;
             this.country = address.country;
+            this.user = address.user;
             return this;
         }
 

@@ -4,27 +4,41 @@
    Date: 21 June 2026 */
 
 package za.ac.cput.domain;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "Reviews")
 public class Review {
+
+    @Id
     private String reviewId;
+
     private String rating;
     private String comment;
-    private LocalDate reviewDate;
+    private LocalDate reviewDate; // Aligned with LocalDate in factory
 
-    protected Review() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    protected Review(Builder builder) {
+    protected Review() {
+    }
+
+    private Review(Builder builder) {
         this.reviewId = builder.reviewId;
         this.rating = builder.rating;
         this.comment = builder.comment;
         this.reviewDate = builder.reviewDate;
+        this.user = builder.user;
     }
 
+    // GETTERS
     public String getReviewId() { return reviewId; }
     public String getRating() { return rating; }
     public String getComment() { return comment; }
     public LocalDate getReviewDate() { return reviewDate; }
+    public User getUser() { return user; }
 
     @Override
     public String toString() {
@@ -41,6 +55,7 @@ public class Review {
         private String rating;
         private String comment;
         private LocalDate reviewDate;
+        private User user;
 
         public Builder setReviewId(String reviewId) {
             this.reviewId = reviewId;
@@ -62,11 +77,17 @@ public class Review {
             return this;
         }
 
+        public Builder setUser(User user) {
+            this.user = user;
+            return this;
+        }
+
         public Builder copy(Review review) {
             this.reviewId = review.reviewId;
             this.rating = review.rating;
             this.comment = review.comment;
             this.reviewDate = review.reviewDate;
+            this.user = review.user;
             return this;
         }
 

@@ -22,7 +22,7 @@ public class AddressFactory {
                 .setSuburb(suburb)
                 .setCity(city)
                 .setProvince(province)
-                .setPostalCode(postalCode)
+                .setPostalCode(Short.parseShort(postalCode))
                 .setCountry(country)
                 .build();
     }
