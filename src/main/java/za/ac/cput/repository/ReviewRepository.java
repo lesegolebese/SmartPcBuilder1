@@ -16,6 +16,6 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
-    // Custom query method example if you want to find reviews by their rating score
+
     List<Review> findByRating(String rating);
 }

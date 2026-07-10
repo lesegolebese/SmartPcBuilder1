@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-    // Custom query method to look up a user by their unique email address
+
     Optional<User> findByEmail(String email);
 
     // Custom query method to look up a user by their phone number

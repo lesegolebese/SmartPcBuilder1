@@ -18,6 +18,5 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     // Custom query method example to find addresses by city
     List<Address> findByCity(String city);
 
-    // Custom query method example to find addresses by postal code
     List<Address> findByPostalCode(String postalCode);
 }
