@@ -1,6 +1,6 @@
 /* Admin.java
    Admin POJO entity implementing Builder Pattern
-   Author: Lesego Lebese (222371196)
+   Author: Matinisa Lubisi (222527269)
    Date: 21 June 2026 */
 
 package za.ac.cput.domain;
