@@ -10,7 +10,7 @@ import za.ac.cput.util.Helper;
 
 public class AddressFactory {
 
-    public static Address createAddress(Long addressId, String streetName, String suburb, String city, String province, String postalCode, String country) {
+    public static Address createAddress(Long addressId, String streetName, String suburb, String city, String province) {
 
         if (addressId == null || Helper.isNullOrEmpty(streetName) || Helper.isNullOrEmpty(city) || Helper.isNullOrEmpty(postalCode) || Helper.isNullOrEmpty(country)) {
             return null;

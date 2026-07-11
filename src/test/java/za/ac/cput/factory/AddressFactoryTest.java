@@ -15,7 +15,7 @@ class AddressFactoryTest {
 
     @BeforeEach
     void setUp() {
-        address = AddressFactory.createAddress(101L, "12 Darling St", "Cape Town CBD", "Cape Town", "Western Cape", "8001", "South Africa");
+        address = AddressFactory.createAddress(101L, "12 Darling St", "Cape Town CBD", "Cape Town", "Western Cape");
     }
 
     @Test
@@ -27,7 +27,7 @@ class AddressFactoryTest {
 
     @Test
     void testCreateAddressWithMissingData() {
-        Address invalidAddress = AddressFactory.createAddress(null, "", "Suburb", "", "Province", "", "South Africa");
+        Address invalidAddress = AddressFactory.createAddress(null, "", "Suburb", "", "Province");
         assertNull(invalidAddress, "Factory should return null for missing ID, street, city, or postal code");
         System.out.println("Validation check passed: Invalid address is null.");
     }

@@ -24,7 +24,7 @@ class ReviewServiceTest {
     static void init() {
         review = ReviewFactory.createReview(
                 "R555",
-                4,
+                6,
                 "Great system setup, processing speeds are incredibly fluid."
         );
         assertNotNull(review);

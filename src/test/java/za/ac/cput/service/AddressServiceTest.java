@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AddressServiceImplTest {
+class AddressServiceTest {
 
     @Autowired
     private AddressService service;
