@@ -7,71 +7,69 @@
 
 package za.ac.cput.domain;
 
+
+
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "pc_builds")
 public class PcBuild {
 
-    private Long buildId;
+    @Id
+    private String buildId;
+
     private String buildName;
-    private LocalDate createdDate;
-    private User user;
-    private List<PcBuildItem> buildItems;
+    private double totalPrice;
+    private String buildDescription;
+
+
+    @OneToMany(mappedBy = "pcBuild", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<PcBuildItem> pcBuildItems = new ArrayList<>();
+
 
     protected PcBuild() {
     }
 
-    protected PcBuild(Builder builder) {
+
+    private PcBuild(Builder builder) {
         this.buildId = builder.buildId;
         this.buildName = builder.buildName;
-        this.createdDate = builder.createdDate;
-        this.user = builder.user;
-        this.buildItems = builder.buildItems != null
-                ? builder.buildItems
-                : new ArrayList<>();
+        this.totalPrice = builder.totalPrice;
+        this.buildDescription = builder.buildDescription;
+        this.pcBuildItems = builder.pcBuildItems;
     }
 
-    public Long getBuildId() {
-        return buildId;
-    }
 
-    public String getBuildName() {
-        return buildName;
-    }
+    public String getBuildId() { return buildId; }
+    public String getBuildName() { return buildName; }
+    public double getTotalPrice() { return totalPrice; }
+    public String getBuildDescription() { return buildDescription; }
+    public List<PcBuildItem> getPcBuildItems() { return pcBuildItems; }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public List<PcBuildItem> getBuildItems() {
-        return buildItems;
-    }
 
     @Override
     public String toString() {
         return "PcBuild{" +
-                "buildId=" + buildId +
+                "buildId='" + buildId + '\'' +
                 ", buildName='" + buildName + '\'' +
-                ", createdDate=" + createdDate +
-                ", user=" + user +
-                ", buildItems=" + buildItems +
+                ", totalPrice=" + totalPrice +
+                ", buildDescription='" + buildDescription + '\'' +
                 '}';
     }
 
+
     public static class Builder {
-
-        private Long buildId;
+        private String buildId;
         private String buildName;
-        private LocalDate createdDate;
-        private User user;
-        private List<PcBuildItem> buildItems;
+        private double totalPrice;
+        private String buildDescription;
+        private List<PcBuildItem> pcBuildItems = new ArrayList<>();
 
-        public Builder setBuildId(Long buildId) {
+        public Builder setBuildId(String buildId) {
             this.buildId = buildId;
             return this;
         }
@@ -81,32 +79,36 @@ public class PcBuild {
             return this;
         }
 
-        public Builder setCreatedDate(LocalDate createdDate) {
-            this.createdDate = createdDate;
+        public Builder setTotalPrice(double totalPrice) {
+            this.totalPrice = totalPrice;
             return this;
         }
 
-        public Builder setUser(User user) {
-            this.user = user;
+        public Builder setBuildDescription(String buildDescription) {
+            this.buildDescription = buildDescription;
             return this;
         }
 
-        public Builder setBuildItems(List<PcBuildItem> buildItems) {
-            this.buildItems = buildItems;
+        public Builder setPcBuildItems(List<PcBuildItem> pcBuildItems) {
+            this.pcBuildItems = pcBuildItems;
             return this;
         }
 
         public Builder copy(PcBuild pcBuild) {
             this.buildId = pcBuild.buildId;
             this.buildName = pcBuild.buildName;
-            this.createdDate = pcBuild.createdDate;
-            this.user = pcBuild.user;
-            this.buildItems = pcBuild.buildItems;
+            this.totalPrice = pcBuild.totalPrice;
+            this.buildDescription = pcBuild.buildDescription;
+            this.pcBuildItems = pcBuild.pcBuildItems;
             return this;
         }
 
         public PcBuild build() {
             return new PcBuild(this);
+        }
+
+        public Builder setCreatedDate(LocalDate createdDate) {
+            return null;
         }
     }
 }
