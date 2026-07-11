@@ -7,50 +7,70 @@
 
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pc_build_items")
 public class PcBuildItem {
 
-    private Long buildItemId;
+    @Id
+    private String buildItemId;
+
+    private String componentName;
     private int quantity;
-    private Product product;
+    private double unitPrice;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "build_id")
+    private PcBuild pcBuild;
+
 
     protected PcBuildItem() {
     }
 
-    protected PcBuildItem(Builder builder) {
+
+    private PcBuildItem(Builder builder) {
         this.buildItemId = builder.buildItemId;
+        this.componentName = builder.componentName;
         this.quantity = builder.quantity;
-        this.product = builder.product;
+        this.unitPrice = builder.unitPrice;
+        this.pcBuild = builder.pcBuild;
     }
 
-    public Long getBuildItemId() {
-        return buildItemId;
-    }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    public String getBuildItemId() { return buildItemId; }
+    public String getComponentName() { return componentName; }
+    public int getQuantity() { return quantity; }
+    public double getUnitPrice() { return unitPrice; }
+    public PcBuild getPcBuild() { return pcBuild; }
 
-    public Product getProduct() {
-        return product;
-    }
 
     @Override
     public String toString() {
         return "PcBuildItem{" +
-                "buildItemId=" + buildItemId +
+                "buildItemId='" + buildItemId + '\'' +
+                ", componentName='" + componentName + '\'' +
                 ", quantity=" + quantity +
-                ", product=" + product +
+                ", unitPrice=" + unitPrice +
                 '}';
     }
 
+
     public static class Builder {
-
-        private Long buildItemId;
+        private String buildItemId;
+        private String componentName;
         private int quantity;
-        private Product product;
+        private double unitPrice;
+        private PcBuild pcBuild;
 
-        public Builder setBuildItemId(Long buildItemId) {
+        public Builder setBuildItemId(String buildItemId) {
             this.buildItemId = buildItemId;
+            return this;
+        }
+
+        public Builder setComponentName(String componentName) {
+            this.componentName = componentName;
             return this;
         }
 
@@ -59,15 +79,22 @@ public class PcBuildItem {
             return this;
         }
 
-        public Builder setProduct(Product product) {
-            this.product = product;
+        public Builder setUnitPrice(double unitPrice) {
+            this.unitPrice = unitPrice;
             return this;
         }
 
-        public Builder copy(PcBuildItem item) {
-            this.buildItemId = item.buildItemId;
-            this.quantity = item.quantity;
-            this.product = item.product;
+        public Builder setPcBuild(PcBuild pcBuild) {
+            this.pcBuild = pcBuild;
+            return this;
+        }
+
+        public Builder copy(PcBuildItem pcBuildItem) {
+            this.buildItemId = pcBuildItem.buildItemId;
+            this.componentName = pcBuildItem.componentName;
+            this.quantity = pcBuildItem.quantity;
+            this.unitPrice = pcBuildItem.unitPrice;
+            this.pcBuild = pcBuildItem.pcBuild;
             return this;
         }
 

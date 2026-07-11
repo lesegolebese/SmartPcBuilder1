@@ -21,7 +21,7 @@ public class PcBuildFactory {
         }
 
         return new PcBuild.Builder()
-                .setBuildId(buildId)
+                .setBuildId(String.valueOf(buildId))
                 .setBuildName(buildName)
                 .setCreatedDate(createdDate)
                 .build();

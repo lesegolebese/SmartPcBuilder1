@@ -17,7 +17,7 @@ public class PcBuildItemFactory {
         }
 
         return new PcBuildItem.Builder()
-                .setBuildItemId(buildItemId)
+                .setBuildItemId(String.valueOf(buildItemId))
                 .setQuantity(quantity)
                 .build();
     }
