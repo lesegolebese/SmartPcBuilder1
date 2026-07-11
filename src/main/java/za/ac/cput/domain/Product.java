@@ -1,4 +1,11 @@
 package za.ac.cput.domain;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /* Product.java
    Product POJO class
 
@@ -7,10 +14,14 @@ package za.ac.cput.domain;
    Date: 21 June 2026
 */
 
-//
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
+
     private String productName;
     private String description;
     private Double price;
@@ -103,4 +114,3 @@ public class Product {
         }
     }
 }
-
