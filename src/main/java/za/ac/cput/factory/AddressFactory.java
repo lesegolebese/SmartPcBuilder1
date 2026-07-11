@@ -3,6 +3,11 @@
  * Author: Lesego Lebese 222371196
  * Date: 27 June 2026
  */
+/*
+ * AddressFactory.java
+ * Author: Lesego Lebese 222371196
+ * Date: 27 June 2026
+ */
 package za.ac.cput.factory;
 
 import za.ac.cput.domain.Address;
@@ -10,7 +15,8 @@ import za.ac.cput.util.Helper;
 
 public class AddressFactory {
 
-    public static Address createAddress(Long addressId, String streetName, String suburb, String city, String province) {
+    // 💡 Added String postalCode and String country to the parameters list below
+    public static Address createAddress(Long addressId, String streetName, String suburb, String city, String province, String postalCode, String country) {
 
         if (addressId == null || Helper.isNullOrEmpty(streetName) || Helper.isNullOrEmpty(city) || Helper.isNullOrEmpty(postalCode) || Helper.isNullOrEmpty(country)) {
             return null;

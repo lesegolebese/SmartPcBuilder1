@@ -26,7 +26,9 @@ class AddressServiceTest {
                 "99 Loop St",
                 "Central Business District",
                 "Cape Town",
-                "8000"
+                "Western Cape",  // Province
+                "8000",          // Postal Code (Added)
+                "South Africa"   // Country (Added)
         );
         assertNotNull(address);
     }

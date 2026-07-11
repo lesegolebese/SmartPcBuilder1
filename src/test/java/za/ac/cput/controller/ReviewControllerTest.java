@@ -1,5 +1,6 @@
 package za.ac.cput.controller;
 
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,6 +8,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import za.ac.cput.domain.Review;
 import za.ac.cput.factory.ReviewFactory;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,8 +27,9 @@ class ReviewControllerTest {
     static void init() {
         review = ReviewFactory.createReview(
                 "R999",
-                5,
-                "Excellent build quality and reliable software configuration."
+                "5", // 💡 Changed from 5 to "5" to match String type
+                "Excellent build quality and reliable software configuration.",
+                LocalDate.now() // 💡 Added the missing LocalDate parameter
         );
         assertNotNull(review);
     }

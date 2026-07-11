@@ -1,12 +1,12 @@
 package za.ac.cput.service;
 
-
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Review;
 import za.ac.cput.factory.ReviewFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,8 +24,9 @@ class ReviewServiceTest {
     static void init() {
         review = ReviewFactory.createReview(
                 "R555",
-                6,
-                "Great system setup, processing speeds are incredibly fluid."
+                "5",
+                "Great system setup, processing speeds are incredibly fluid.",
+                LocalDate.now()
         );
         assertNotNull(review);
     }

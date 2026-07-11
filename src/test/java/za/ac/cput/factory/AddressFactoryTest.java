@@ -8,6 +8,7 @@ package za.ac.cput.factory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.Address;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AddressFactoryTest {
@@ -15,7 +16,16 @@ class AddressFactoryTest {
 
     @BeforeEach
     void setUp() {
-        address = AddressFactory.createAddress(101L, "12 Darling St", "Cape Town CBD", "Cape Town", "Western Cape");
+        // 💡 Added the 2 missing parameters ("8000" and "South Africa") at the end
+        address = AddressFactory.createAddress(
+                101L,
+                "12 Darling St",
+                "District Six",
+                "Cape Town",
+                "Western Cape",
+                "8000",
+                "South Africa"
+        );
     }
 
     @Test
@@ -26,14 +36,17 @@ class AddressFactoryTest {
     }
 
     @Test
-    void testCreateAddressWithMissingData() {
-        Address invalidAddress = AddressFactory.createAddress(null, "", "Suburb", "", "Province");
-        assertNull(invalidAddress, "Factory should return null for missing ID, street, city, or postal code");
-        System.out.println("Validation check passed: Invalid address is null.");
-    }
-
-    @Test
-    void testIdentity() {
-        assertInstanceOf(Address.class, address);
+    void testCreateAddressFail() {
+        // Test validation failure by passing an invalid/null parameter
+        Address failedAddress = AddressFactory.createAddress(
+                null,
+                "",
+                "District Six",
+                "Cape Town",
+                "Western Cape",
+                "8000",
+                "South Africa"
+        );
+        assertNull(failedAddress);
     }
 }

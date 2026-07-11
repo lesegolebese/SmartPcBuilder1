@@ -27,7 +27,9 @@ class AddressControllerTest {
                 "10 Keizersgracht St",
                 "District Six",
                 "Cape Town",
-                "8001"
+                "Western Cape",
+                "8001",
+                "South Africa"
         );
         assertNotNull(address);
     }
