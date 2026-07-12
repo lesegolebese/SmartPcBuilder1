@@ -3,6 +3,7 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.Main;
 import za.ac.cput.domain.Address;
 import za.ac.cput.factory.AddressFactory;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = Main.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AddressServiceTest {
 
