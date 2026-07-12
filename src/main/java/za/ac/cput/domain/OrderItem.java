@@ -1,5 +1,7 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
 /* OrderItem.java
    OrderItem POJO class
 
@@ -8,10 +10,23 @@ package za.ac.cput.domain;
    Date: 21 June 2026
 */
 
+@Entity
+@Table(name = "order_items")
 public class OrderItem {
+
+    @Id
     private String orderItemId;
+
     private int quantity;
     private double unitPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     protected OrderItem() {}
 
@@ -19,11 +34,29 @@ public class OrderItem {
         this.orderItemId = builder.orderItemId;
         this.quantity = builder.quantity;
         this.unitPrice = builder.unitPrice;
+        this.order = builder.order;
+        this.product = builder.product;
     }
 
-    public String getOrderItemId() { return orderItemId; }
-    public int getQuantity() { return quantity; }
-    public double getUnitPrice() { return unitPrice; }
+    public String getOrderItemId() {
+        return orderItemId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
 
     @Override
     public String toString() {
@@ -38,6 +71,8 @@ public class OrderItem {
         private String orderItemId;
         private int quantity;
         private double unitPrice;
+        private Order order;
+        private Product product;
 
         public Builder setOrderItemId(String orderItemId) {
             this.orderItemId = orderItemId;
@@ -54,10 +89,22 @@ public class OrderItem {
             return this;
         }
 
+        public Builder setOrder(Order order) {
+            this.order = order;
+            return this;
+        }
+
+        public Builder setProduct(Product product) {
+            this.product = product;
+            return this;
+        }
+
         public Builder copy(OrderItem orderItem) {
             this.orderItemId = orderItem.orderItemId;
             this.quantity = orderItem.quantity;
             this.unitPrice = orderItem.unitPrice;
+            this.order = orderItem.order;
+            this.product = orderItem.product;
             return this;
         }
 
