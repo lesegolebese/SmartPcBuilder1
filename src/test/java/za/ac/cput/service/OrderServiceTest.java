@@ -31,7 +31,7 @@ class OrderServiceTest {
     }
 
     @Test
-    @Order(1)
+    @org.junit.jupiter.api.Order(1)
     void testCreate() {
         Order created = service.create(order);
         assertNotNull(created);
@@ -39,7 +39,7 @@ class OrderServiceTest {
     }
 
     @Test
-    @Order(2)
+    @org.junit.jupiter.api.Order(2)
     void testRead() {
         Order read = service.read(order.getOrderId());
         assertNotNull(read);
@@ -47,7 +47,7 @@ class OrderServiceTest {
     }
 
     @Test
-    @Order(3)
+    @org.junit.jupiter.api.Order(3)
     void testUpdate() {
         Order updatedOrder = new Order.Builder()
                 .copy(order)
@@ -63,7 +63,7 @@ class OrderServiceTest {
     }
 
     @Test
-    @Order(4)
+    @org.junit.jupiter.api.Order(4)
     void testGetAll() {
         List<Order> list = service.getAll();
         assertNotNull(list);
@@ -73,7 +73,7 @@ class OrderServiceTest {
     }
 
     @Test
-    @Order(5)
+    @org.junit.jupiter.api.Order(5)
     void testDelete() {
         boolean deleted = service.delete(order.getOrderId());
 
