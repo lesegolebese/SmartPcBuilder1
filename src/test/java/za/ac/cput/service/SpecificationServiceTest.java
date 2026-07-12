@@ -2,7 +2,7 @@
 package za.ac.cput.service;
 
 import org.junit.jupiter.api.*;
-        import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Specification;
 import za.ac.cput.factory.SpecificationFactory;
@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SpecificationServiceTest {
+
 
     @Autowired
     private SpecificationService service;
