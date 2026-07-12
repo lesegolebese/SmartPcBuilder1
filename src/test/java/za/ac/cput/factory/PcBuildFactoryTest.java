@@ -1,16 +1,8 @@
-/*
- * PcBuildFactoryTest.java
- * Author: Mnelisi Mabona (222062088)
- * Date: 27 June 2026
- */
-
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.PcBuild;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,37 +12,27 @@ class PcBuildFactoryTest {
 
     @BeforeEach
     void setUp() {
+        // Aligned with your 4-argument factory: String, String, double, String
         pcBuild = PcBuildFactory.createPcBuild(
-                201L,
+                "201",
                 "Gaming PC",
-                LocalDate.of(2026, 6, 27)
+                25500.00,
+                "High-end gaming setup with RTX 4070"
         );
     }
 
     @Test
     void testCreatePcBuild() {
         assertNotNull(pcBuild);
-        assertEquals(201L, pcBuild.getBuildId());
+        assertEquals("201", pcBuild.getBuildId());
         assertEquals("Gaming PC", pcBuild.getBuildName());
-
-        System.out.println(pcBuild);
+        assertEquals(25500.00, pcBuild.getTotalPrice());
+        System.out.println("Factory Created PcBuild Successfully: " + pcBuild);
     }
 
     @Test
-    void testCreatePcBuildWithMissingData() {
-
-        PcBuild invalidBuild = PcBuildFactory.createPcBuild(
-                null,
-                null,
-                LocalDate.now()
-        );
-
-        assertNull(invalidBuild,
-                "Factory should return null for missing build ID or build name.");
-    }
-
-    @Test
-    void testIdentity() {
-        assertInstanceOf(PcBuild.class, pcBuild);
+    void testCreatePcBuildWithNull() {
+        PcBuild invalidBuild = PcBuildFactory.createPcBuild(null, "", 0.0, "");
+        assertNull(invalidBuild);
     }
 }
