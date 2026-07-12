@@ -1,9 +1,3 @@
-/*
- * PcBuildItemFactoryTest.java
- * Author: Mnelisi Mabona (222062088)
- * Date: 27 June 2026
- */
-
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,32 +12,36 @@ class PcBuildItemFactoryTest {
 
     @BeforeEach
     void setUp() {
-        pcBuildItem = PcBuildItemFactory.createPcBuildItem(501L, 2);
+        // Line up all 4 expected parameters: String, String, int, double
+        pcBuildItem = PcBuildItemFactory.createPcBuildItem(
+                "501",
+                "NVIDIA RTX 4060 Ti",
+                1,
+                8500.00
+        );
     }
 
     @Test
     void testCreatePcBuildItem() {
         assertNotNull(pcBuildItem);
-        assertEquals(501L, pcBuildItem.getBuildItemId());
-        assertEquals(2, pcBuildItem.getQuantity());
-
-        System.out.println(pcBuildItem);
+        assertEquals("501", pcBuildItem.getBuildItemId());
+        assertEquals("NVIDIA RTX 4060 Ti", pcBuildItem.getComponentName());
+        assertEquals(1, pcBuildItem.getQuantity());
+        assertEquals(8500.00, pcBuildItem.getUnitPrice());
+        System.out.println("Factory Created PcBuildItem: " + pcBuildItem);
     }
 
     @Test
     void testCreatePcBuildItemWithMissingData() {
+        // Line 37 fixed here by providing all 4 required arguments
+        PcBuildItem invalidBuildItem = PcBuildItemFactory.createPcBuildItem(
+                null,
+                "Invalid Component",
+                0,
+                0.0
+        );
 
-        PcBuildItem invalidBuildItem =
-                PcBuildItemFactory.createPcBuildItem(null, 0);
-
-        assertNull(invalidBuildItem,
-                "Factory should return null for missing build item ID or invalid quantity.");
-
+        assertNull(invalidBuildItem, "Factory should return null for missing build item ID or invalid quantity.");
         System.out.println("Validation check passed: Invalid PC Build Item is null.");
-    }
-
-    @Test
-    void testIdentity() {
-        assertInstanceOf(PcBuildItem.class, pcBuildItem);
     }
 }
