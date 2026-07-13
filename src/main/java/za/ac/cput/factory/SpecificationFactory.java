@@ -9,9 +9,7 @@ public class SpecificationFactory {
                                                     String key,
                                                     String value) {
 
-        if (specificationId == null ||
-                Helper.isNullOrEmpty(key) ||
-                Helper.isNullOrEmpty(value)) {
+        if (Helper.isNullOrEmpty(key) || Helper.isNullOrEmpty(value)) {
             return null;
         }
 

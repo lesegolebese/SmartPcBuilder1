@@ -5,7 +5,14 @@
 
 package za.ac.cput.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "compatibility_rules")
 public class CompatibilityRule {
+    @Id
     private String ruleId;
     private String componentType1;
     private String description;
