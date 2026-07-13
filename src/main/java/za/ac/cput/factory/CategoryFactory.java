@@ -9,9 +9,7 @@ public class CategoryFactory {
                                           String name,
                                           String description) {
 
-        if (categoryId == null ||
-                Helper.isNullOrEmpty(name) ||
-                Helper.isNullOrEmpty(description)) {
+        if (Helper.isNullOrEmpty(name) || Helper.isNullOrEmpty(description)) {
             return null;
         }
 

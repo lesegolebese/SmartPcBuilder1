@@ -11,8 +11,7 @@ public class ProductFactory {
                                         Double price,
                                         int stockQuantity) {
 
-        if (productId == null ||
-                Helper.isNullOrEmpty(productName) ||
+        if (Helper.isNullOrEmpty(productName) ||
                 Helper.isNullOrEmpty(description) ||
                 price == null) {
             return null;

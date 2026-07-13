@@ -5,7 +5,14 @@
 
 package za.ac.cput.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "admins")
 public class Admin {
+    @Id
     private String adminId;
     private String firstName;
     private String middleName;
