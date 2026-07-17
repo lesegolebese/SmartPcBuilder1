@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Admin;
-import za.ac.cput.service.AdminService;
+import za.ac.cput.service.IAdminService;
 
 import java.util.List;
 
@@ -13,22 +13,22 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final AdminService adminService;
+    private final IAdminService IAdminService;
 
     @Autowired
-    public AdminController(AdminService adminService) {
-        this.adminService = adminService;
+    public AdminController(IAdminService IAdminService) {
+        this.IAdminService = IAdminService;
     }
 
     @PostMapping("/create")
     public ResponseEntity<Admin> create(@RequestBody Admin admin) {
-        Admin created = adminService.create(admin);
+        Admin created = IAdminService.create(admin);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
     @GetMapping("/read/{id}")
     public ResponseEntity<Admin> read(@PathVariable String id) {
-        Admin admin = adminService.read(id);
+        Admin admin = IAdminService.read(id);
         if (admin == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -37,7 +37,7 @@ public class AdminController {
 
     @PutMapping("/update")
     public ResponseEntity<Admin> update(@RequestBody Admin admin) {
-        Admin updated = adminService.update(admin);
+        Admin updated = IAdminService.update(admin);
         if (updated == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -46,19 +46,19 @@ public class AdminController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable String id) {
-        boolean deleted = adminService.delete(id);
+        boolean deleted = IAdminService.delete(id);
         return new ResponseEntity<>(deleted, HttpStatus.OK);
     }
 
     @GetMapping("/getall")
     public ResponseEntity<List<Admin>> getAll() {
-        List<Admin> admins = adminService.getAll();
+        List<Admin> admins = IAdminService.getAll();
         return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<Admin> findByEmail(@PathVariable String email) {
-        Admin admin = adminService.findByEmail(email);
+        Admin admin = IAdminService.findByEmail(email);
         if (admin == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -67,7 +67,7 @@ public class AdminController {
 
     @PostMapping("/login")
     public ResponseEntity<Admin> login(@RequestParam String email, @RequestParam String password) {
-        Admin admin = adminService.findByEmailAndPassword(email, password);
+        Admin admin = IAdminService.findByEmailAndPassword(email, password);
         if (admin == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
