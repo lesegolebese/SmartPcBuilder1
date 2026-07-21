@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AdminServiceTest {
 
     @Autowired
-    private AdminService service;
+    private IAdminService service;
 
     private static Admin admin;
 
