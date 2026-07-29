@@ -5,9 +5,19 @@
 
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "cart_items")
 public class CartItem {
-    private String cartItemId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cartItemId;
+
+    @Column(name = "quantity", nullable = false)
     private int quantity;
+
+    @Column(name = "unit_price", nullable = false)
     private double unitPrice;
 
     protected CartItem() {}
@@ -18,25 +28,25 @@ public class CartItem {
         this.unitPrice = builder.unitPrice;
     }
 
-    public String getCartItemId() { return cartItemId; }
+    public Long getCartItemId() { return cartItemId; }
     public int getQuantity() { return quantity; }
     public double getUnitPrice() { return unitPrice; }
 
     @Override
     public String toString() {
         return "CartItem{" +
-                "cartItemId='" + cartItemId + '\'' +
+                "cartItemId=" + cartItemId +
                 ", quantity=" + quantity +
                 ", unitPrice=" + unitPrice +
                 '}';
     }
 
     public static class Builder {
-        private String cartItemId;
+        private Long cartItemId;
         private int quantity;
         private double unitPrice;
 
-        public Builder setCartItemId(String cartItemId) {
+        public Builder setCartItemId(Long cartItemId) {
             this.cartItemId = cartItemId;
             return this;
         }
