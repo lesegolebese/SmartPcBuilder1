@@ -55,6 +55,7 @@ class CartServiceTest {
         Cart updatedCart = new Cart.Builder().copy(cart).setCreatedDate(createdDate.plusDays(1)).build();
         Cart updated = service.update(updatedCart);
         assertNotNull(updated);
+
         assertEquals(createdDate.plusDays(1), updated.getCreatedDate());
         cart = updated;
         System.out.println("Service Updated Cart: " + updated);
