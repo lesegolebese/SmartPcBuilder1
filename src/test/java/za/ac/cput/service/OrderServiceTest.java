@@ -18,11 +18,12 @@ class OrderServiceTest {
     private OrderService service;
 
     private static za.ac.cput.domain.Order order;
+    private static Long createdOrderId;
 
     @BeforeAll
     static void init() {
         order = OrderFactory.createOrder(
-                1001L,
+                null,
                 LocalDate.now(),
                 "Pending"
         );
@@ -34,13 +35,15 @@ class OrderServiceTest {
     void testCreate() {
         za.ac.cput.domain.Order created = service.create(order);
         assertNotNull(created);
+        createdOrderId = created.getOrderId();
+        order = created;
         System.out.println("Service Created Order: " + created);
     }
 
     @Test
     @org.junit.jupiter.api.Order(2)
     void testRead() {
-        za.ac.cput.domain.Order read = service.read(order.getOrderId());
+        za.ac.cput.domain.Order read = service.read(createdOrderId);
         assertNotNull(read);
         System.out.println("Service Read Order: " + read);
     }
@@ -50,6 +53,7 @@ class OrderServiceTest {
     void testUpdate() {
         za.ac.cput.domain.Order updatedOrder = new za.ac.cput.domain.Order.Builder()
                 .copy(order)
+                .setOrderId(createdOrderId)
                 .setStatus("Completed")
                 .build();
 
@@ -74,11 +78,11 @@ class OrderServiceTest {
     @Test
     @org.junit.jupiter.api.Order(5)
     void testDelete() {
-        boolean deleted = service.delete(order.getOrderId());
+        boolean deleted = service.delete(createdOrderId);
 
         assertTrue(deleted);
 
-        za.ac.cput.domain.Order read = service.read(order.getOrderId());
+        za.ac.cput.domain.Order read = service.read(createdOrderId);
 
         assertNull(read);
 

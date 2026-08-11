@@ -17,19 +17,19 @@ class OrderItemFactoryTest {
 
     @BeforeEach
     void setUp() {
-        orderItem = OrderItemFactory.createOrderItem("OI001", 2, 199.99);
+        orderItem = OrderItemFactory.createOrderItem(1L, 2, 199.99);
     }
 
     @Test
     void testCreateOrderItem() {
         assertNotNull(orderItem);
-        assertEquals("OI001", orderItem.getOrderItemId());
+        assertEquals(1L, orderItem.getOrderItemId());
         System.out.println(orderItem);
     }
 
     @Test
     void testCreateOrderItemWithInvalidData() {
-        OrderItem invalidOrderItem = OrderItemFactory.createOrderItem("", 0, 0);
+        OrderItem invalidOrderItem = OrderItemFactory.createOrderItem(null, 0, 0);
         assertNull(invalidOrderItem);
     }
 

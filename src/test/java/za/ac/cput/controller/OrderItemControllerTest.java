@@ -19,12 +19,13 @@ class OrderItemControllerTest {
 
     private static final String BASE_URL = "/orderItem";
     private static OrderItem orderItem;
+    private static Long createdOrderItemId;
 
     @BeforeAll
     static void init() {
 
         orderItem = OrderItemFactory.createOrderItem(
-                "OI001",
+                null,
                 2,
                 399.99
         );
@@ -45,6 +46,7 @@ class OrderItemControllerTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
+        createdOrderItemId = response.getBody().getOrderItemId();
 
         System.out.println("Created Order Item: " + response.getBody());
     }
@@ -53,7 +55,7 @@ class OrderItemControllerTest {
     @Order(2)
     void testRead() {
 
-        String url = BASE_URL + "/read/" + orderItem.getOrderItemId();
+        String url = BASE_URL + "/read/" + createdOrderItemId;
 
         ResponseEntity<OrderItem> response =
                 restTemplate.getForEntity(url,
@@ -73,6 +75,7 @@ class OrderItemControllerTest {
 
         OrderItem updated = new OrderItem.Builder()
                 .copy(orderItem)
+                .setOrderItemId(createdOrderItemId)
                 .setQuantity(5)
                 .build();
 
@@ -111,7 +114,7 @@ class OrderItemControllerTest {
     @Order(5)
     void testDelete() {
 
-        String url = BASE_URL + "/delete/" + orderItem.getOrderItemId();
+        String url = BASE_URL + "/delete/" + createdOrderItemId;
 
         ResponseEntity<Boolean> response =
                 restTemplate.exchange(url,

@@ -14,6 +14,9 @@ public class AdminFactory {
         if (Helper.isNullOrEmpty(adminId) || Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(password)) {
             return null;
         }
+        if (!Helper.isValidEmail(email)) {
+            return null;
+        }
 
         return new Admin.Builder()
                 .setAdminId(adminId)

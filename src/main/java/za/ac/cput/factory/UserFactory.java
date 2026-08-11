@@ -14,6 +14,9 @@ public class UserFactory {
         if (Helper.isNullOrEmpty(userId) || Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(password)) {
             return null;
         }
+        if (!Helper.isValidEmail(email)) {
+            return null;
+        }
 
         return new User.Builder()
                 .setUserId(userId)

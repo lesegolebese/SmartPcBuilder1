@@ -23,7 +23,7 @@ public class OrderItemService implements IOrderItemService {
     }
 
     @Override
-    public OrderItem read(String id) {
+    public OrderItem read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -36,7 +36,7 @@ public class OrderItemService implements IOrderItemService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
             return !repository.existsById(id);

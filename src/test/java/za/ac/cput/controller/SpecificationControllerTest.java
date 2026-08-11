@@ -22,7 +22,7 @@ class SpecificationControllerTest {
     @BeforeAll
     static void init() {
         specification = SpecificationFactory.createSpecification(
-                1L,
+                null,
                 "RAM",
                 "16GB DDR5"
         );
@@ -67,7 +67,7 @@ class SpecificationControllerTest {
         Specification updatedSpecification =
                 new Specification.Builder()
                         .copy(specification)
-                        .setValue("32GB DDR5")
+                        .setSpecValue("32GB DDR5")
                         .build();
 
         HttpEntity<Specification> entity = new HttpEntity<>(updatedSpecification);

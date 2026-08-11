@@ -20,11 +20,12 @@ class OrderControllerTest {
 
     private static final String BASE_URL = "/order";
     private static za.ac.cput.domain.Order order;
+    private static Long createdOrderId;
 
     @BeforeAll
     static void init() {
         order = OrderFactory.createOrder(
-                1L,
+                null,
                 LocalDate.now(),
                 "Pending"
         );
@@ -41,6 +42,7 @@ class OrderControllerTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
+        createdOrderId = response.getBody().getOrderId();
 
         System.out.println("Created Order: " + response.getBody());
     }
@@ -48,7 +50,7 @@ class OrderControllerTest {
     @Test
     @Order(2)
     void testRead() {
-        String url = BASE_URL + "/read/" + order.getOrderId();
+        String url = BASE_URL + "/read/" + createdOrderId;
 
         ResponseEntity<za.ac.cput.domain.Order> response =
                 restTemplate.getForEntity(url, za.ac.cput.domain.Order.class);
@@ -67,6 +69,7 @@ class OrderControllerTest {
 
         za.ac.cput.domain.Order updatedOrder = new za.ac.cput.domain.Order.Builder()
                 .copy(order)
+                .setOrderId(createdOrderId)
                 .setStatus("Completed")
                 .build();
 
@@ -104,7 +107,7 @@ class OrderControllerTest {
     @Order(5)
     void testDelete() {
 
-        String url = BASE_URL + "/delete/" + order.getOrderId();
+        String url = BASE_URL + "/delete/" + createdOrderId;
 
         ResponseEntity<Boolean> response =
                 restTemplate.exchange(url,

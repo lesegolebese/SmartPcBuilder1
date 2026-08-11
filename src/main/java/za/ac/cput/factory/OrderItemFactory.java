@@ -10,9 +10,9 @@ import za.ac.cput.util.Helper;
 
 public class OrderItemFactory {
 
-    public static OrderItem createOrderItem(String orderItemId, int quantity, double unitPrice) {
+    public static OrderItem createOrderItem(Long orderItemId, int quantity, double unitPrice) {
 
-        if (Helper.isNullOrEmpty(orderItemId) || quantity <= 0 || unitPrice <= 0) {
+        if (quantity <= 0 || unitPrice <= 0) {
             return null;
         }
 

@@ -17,13 +17,13 @@ class ComapatibillityRuleFactoryTest {
 
     @BeforeEach
     void setUp() {
-        compatibilityRule = CompatibillityRuleFactory.createCompatibilityRule("RULE001", "GPU", "RTX 4090 compatibility", "Compatible with 850W+ PSU");
+        compatibilityRule = CompatibillityRuleFactory.createCompatibilityRule(1L, "GPU", "RTX 4090 compatibility", "Compatible with 850W+ PSU");
     }
 
     @Test
     void testCreateCompatibilityRule() {
         assertNotNull(compatibilityRule);
-        assertEquals("RULE001", compatibilityRule.getRuleId());
+        assertEquals(1L, compatibilityRule.getRuleId());
         assertEquals("GPU", compatibilityRule.getComponentType1());
         assertEquals("RTX 4090 compatibility", compatibilityRule.getDescription());
         assertEquals("Compatible with 850W+ PSU", compatibilityRule.getRuledescription());
@@ -32,14 +32,14 @@ class ComapatibillityRuleFactoryTest {
 
     @Test
     void testCreateCompatibilityRuleWithMissingData() {
-        CompatibilityRule invalidRule = CompatibillityRuleFactory.createCompatibilityRule("", "", "", "");
+        CompatibilityRule invalidRule = CompatibillityRuleFactory.createCompatibilityRule(null, "", "", "");
         assertNull(invalidRule, "Factory should return null if critical rule fields are empty strings");
         System.out.println("Validation check passed: Invalid rule is null.");
     }
 
     @Test
     void testCreateCompatibilityRuleWithNullFields() {
-        CompatibilityRule invalidRule = CompatibillityRuleFactory.createCompatibilityRule("RULE002", null, "description", "ruledescription");
+        CompatibilityRule invalidRule = CompatibillityRuleFactory.createCompatibilityRule(2L, null, "description", "ruledescription");
         assertNull(invalidRule, "Factory should return null if componentType1 is null");
         System.out.println("Validation check passed: Rule with null componentType1 is null.");
     }

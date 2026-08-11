@@ -24,7 +24,7 @@ public class CompatibillityRuleService implements ICompatibillityRuleService {
     }
 
     @Override
-    public CompatibilityRule read(String id) {
+    public CompatibilityRule read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -37,7 +37,7 @@ public class CompatibillityRuleService implements ICompatibillityRuleService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
             return !repository.existsById(id);
@@ -66,7 +66,7 @@ public class CompatibillityRuleService implements ICompatibillityRuleService {
     }
 
     @Override
-    public CompatibilityRule findByRuleId(String ruleId) {
+    public CompatibilityRule findByRuleId(Long ruleId) {
         return repository.findByRuleId(ruleId).orElse(null);
     }
 }

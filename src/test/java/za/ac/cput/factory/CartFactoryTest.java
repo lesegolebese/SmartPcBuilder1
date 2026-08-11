@@ -28,9 +28,9 @@ class CartFactoryTest {
 
     @Test
     void testCreateCartWithNullCartId() {
-        Cart invalidCart = CartFactory.createCart(null, LocalDate.now());
-        assertNull(invalidCart, "Factory should return null for null cartId");
-        System.out.println("Validation check passed: Invalid cart (null id) is null.");
+        Cart cart = CartFactory.createCart(null, LocalDate.now());
+        assertNotNull(cart, "Factory should create cart with null cartId (auto-generated)");
+        System.out.println("Validation check passed: Cart with null id is created for auto-generation.");
     }
 
     @Test

@@ -22,7 +22,8 @@ class SpecificationFactoryTest {
     @Test
     void testCreateSpecification() {
         assertNotNull(specification);
-        assertEquals("Color", specification.getKey());
+        assertEquals("Color", specification.getSpecKey());
+        assertEquals("Black", specification.getSpecValue());
         System.out.println(specification);
     }
 

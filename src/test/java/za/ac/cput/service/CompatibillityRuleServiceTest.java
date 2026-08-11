@@ -24,11 +24,12 @@ class CompatibillityRuleServiceTest {
     private CompatibillityRuleService service;
 
     private static CompatibilityRule compatibilityRule;
+    private static Long createdRuleId;
 
     @BeforeAll
     static void init() {
         compatibilityRule = CompatibillityRuleFactory.createCompatibilityRule(
-                "RULE001",
+                null,
                 "GPU",
                 "RTX 4090 compatibility",
                 "Compatible with 850W+ PSU"
@@ -41,16 +42,17 @@ class CompatibillityRuleServiceTest {
     void testCreate() {
         CompatibilityRule created = service.create(compatibilityRule);
         assertNotNull(created);
-        assertEquals(compatibilityRule.getRuleId(), created.getRuleId());
+        createdRuleId = created.getRuleId();
+        compatibilityRule = created;
         System.out.println("Service Created Rule: " + created);
     }
 
     @Test
     @Order(2)
     void testRead() {
-        CompatibilityRule read = service.read(compatibilityRule.getRuleId());
+        CompatibilityRule read = service.read(createdRuleId);
         assertNotNull(read);
-        assertEquals(compatibilityRule.getRuleId(), read.getRuleId());
+        assertEquals(createdRuleId, read.getRuleId());
         System.out.println("Service Read Rule: " + read);
     }
 
@@ -59,6 +61,7 @@ class CompatibillityRuleServiceTest {
     void testUpdate() {
         CompatibilityRule updatedRule = new CompatibilityRule.Builder()
                 .copy(compatibilityRule)
+                .setRuleId(createdRuleId)
                 .setDescription("RTX 4090 Updated compatibility")
                 .build();
         CompatibilityRule updated = service.update(updatedRule);
@@ -88,7 +91,7 @@ class CompatibillityRuleServiceTest {
     @Test
     @Order(6)
     void testFindByDescription() {
-        List<CompatibilityRule> found = service.findByDescription(compatibilityRule.getDescription());
+        List<CompatibilityRule> found = service.findByDescription("RTX 4090 Updated compatibility");
         assertNotNull(found);
         assertTrue(found.size() > 0);
         System.out.println("Service Found Rules by Description: " + found.size());
@@ -97,18 +100,18 @@ class CompatibillityRuleServiceTest {
     @Test
     @Order(7)
     void testFindByRuleId() {
-        CompatibilityRule found = service.findByRuleId(compatibilityRule.getRuleId());
+        CompatibilityRule found = service.findByRuleId(createdRuleId);
         assertNotNull(found);
-        assertEquals(compatibilityRule.getRuleId(), found.getRuleId());
+        assertEquals(createdRuleId, found.getRuleId());
         System.out.println("Service Found Rule by RuleId: " + found);
     }
 
     @Test
     @Order(8)
     void testDelete() {
-        boolean deleted = service.delete(compatibilityRule.getRuleId());
+        boolean deleted = service.delete(createdRuleId);
         assertTrue(deleted);
-        CompatibilityRule read = service.read(compatibilityRule.getRuleId());
+        CompatibilityRule read = service.read(createdRuleId);
         assertNull(read);
         System.out.println("Rule successfully deleted from Service context.");
     }

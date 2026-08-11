@@ -37,5 +37,14 @@ public class Helper {
         }
         return true;
     }
+
+    public static boolean isValidEmail(String email) {
+        if (isNullOrEmpty(email)) {
+            return false;
+        }
+        // Baeldung email validation regex
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(emailRegex);
+    }
 }
 

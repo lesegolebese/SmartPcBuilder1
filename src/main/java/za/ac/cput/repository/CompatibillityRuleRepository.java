@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CompatibillityRuleRepository extends JpaRepository<CompatibilityRule, String> {
+public interface CompatibillityRuleRepository extends JpaRepository<CompatibilityRule, Long> {
 
     List<CompatibilityRule> findByComponentType1(String componentType1);
 
@@ -23,5 +23,5 @@ public interface CompatibillityRuleRepository extends JpaRepository<Compatibilit
     List<CompatibilityRule> findByRuledescriptionContaining(String keyword);
 
 
-    Optional<CompatibilityRule> findByRuleId(String ruleId);
+    Optional<CompatibilityRule> findByRuleId(Long ruleId);
 }

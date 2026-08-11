@@ -18,11 +18,12 @@ class OrderItemServiceTest {
     private OrderItemService service;
 
     private static OrderItem orderItem;
+    private static Long createdOrderItemId;
 
     @BeforeAll
     static void init() {
         orderItem = OrderItemFactory.createOrderItem(
-                "OI1001",
+                null,
                 2,
                 1499.99
         );
@@ -36,6 +37,8 @@ class OrderItemServiceTest {
         OrderItem created = service.create(orderItem);
 
         assertNotNull(created);
+        createdOrderItemId = created.getOrderItemId();
+        orderItem = created;
 
         System.out.println("Service Created OrderItem: " + created);
     }
@@ -43,7 +46,7 @@ class OrderItemServiceTest {
     @Test
     @Order(2)
     void testRead() {
-        OrderItem read = service.read(orderItem.getOrderItemId());
+        OrderItem read = service.read(createdOrderItemId);
 
         assertNotNull(read);
 
@@ -55,6 +58,7 @@ class OrderItemServiceTest {
     void testUpdate() {
         OrderItem updatedOrderItem = new OrderItem.Builder()
                 .copy(orderItem)
+                .setOrderItemId(createdOrderItemId)
                 .setQuantity(5)
                 .build();
 
@@ -80,11 +84,11 @@ class OrderItemServiceTest {
     @Test
     @Order(5)
     void testDelete() {
-        boolean deleted = service.delete(orderItem.getOrderItemId());
+        boolean deleted = service.delete(createdOrderItemId);
 
         assertTrue(deleted);
 
-        OrderItem read = service.read(orderItem.getOrderItemId());
+        OrderItem read = service.read(createdOrderItemId);
 
         assertNull(read);
 

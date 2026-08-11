@@ -27,7 +27,7 @@ public class CompatibilityRuleController {
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<CompatibilityRule> read(@PathVariable String id) {
+    public ResponseEntity<CompatibilityRule> read(@PathVariable Long id) {
         CompatibilityRule rule = compatibilityRuleService.read(id);
         if (rule == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -45,7 +45,7 @@ public class CompatibilityRuleController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable String id) {
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         boolean deleted = compatibilityRuleService.delete(id);
         return new ResponseEntity<>(deleted, HttpStatus.OK);
     }
@@ -53,6 +53,9 @@ public class CompatibilityRuleController {
     @GetMapping("/getall")
     public ResponseEntity<List<CompatibilityRule>> getAll() {
         List<CompatibilityRule> rules = compatibilityRuleService.getAll();
+        if (rules.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(rules, HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,62 +23,64 @@ public class Specification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long specificationId;
 
-    private String key;
-    private String value;
+    @Column(name = "spec_key")
+    private String specKey;
+    @Column(name = "spec_value")
+    private String specValue;
 
     protected Specification() {}
 
     protected Specification(Builder builder) {
         this.specificationId = builder.specificationId;
-        this.key = builder.key;
-        this.value = builder.value;
+        this.specKey = builder.specKey;
+        this.specValue = builder.specValue;
     }
 
     public Long getSpecificationId() {
         return specificationId;
     }
 
-    public String getKey() {
-        return key;
+    public String getSpecKey() {
+        return specKey;
     }
 
-    public String getValue() {
-        return value;
+    public String getSpecValue() {
+        return specValue;
     }
 
     @Override
     public String toString() {
         return "Specification{" +
                 "specificationId=" + specificationId +
-                ", key='" + key + '\'' +
-                ", value='" + value + '\'' +
+                ", specKey='" + specKey + '\'' +
+                ", specValue='" + specValue + '\'' +
                 '}';
     }
 
     public static class Builder {
         private Long specificationId;
-        private String key;
-        private String value;
+        private String specKey;
+        private String specValue;
 
         public Builder setSpecificationId(Long specificationId) {
             this.specificationId = specificationId;
             return this;
         }
 
-        public Builder setKey(String key) {
-            this.key = key;
+        public Builder setSpecKey(String specKey) {
+            this.specKey = specKey;
             return this;
         }
 
-        public Builder setValue(String value) {
-            this.value = value;
+        public Builder setSpecValue(String specValue) {
+            this.specValue = specValue;
             return this;
         }
 
         public Builder copy(Specification specification) {
             this.specificationId = specification.specificationId;
-            this.key = specification.key;
-            this.value = specification.value;
+            this.specKey = specification.specKey;
+            this.specValue = specification.specValue;
             return this;
         }
 

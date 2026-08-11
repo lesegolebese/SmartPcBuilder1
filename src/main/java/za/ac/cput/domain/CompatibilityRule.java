@@ -6,6 +6,8 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -13,7 +15,8 @@ import jakarta.persistence.Table;
 @Table(name = "compatibility_rules")
 public class CompatibilityRule {
     @Id
-    private String ruleId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ruleId;
     private String componentType1;
     private String description;
     private String ruledescription;
@@ -27,7 +30,10 @@ public class CompatibilityRule {
         this.ruledescription = builder.ruledescription;
     }
 
-    public String getRuleId() { return ruleId; }
+    public Long getRuleId() {
+        return ruleId;
+    }
+
     public String getComponentType1() { return componentType1; }
     public String getDescription() { return description; }
     public String getRuledescription() { return ruledescription; }
@@ -43,12 +49,12 @@ public class CompatibilityRule {
     }
 
     public static class Builder {
-        private String ruleId;
+        private Long ruleId;
         private String componentType1;
         private String description;
         private String ruledescription;
 
-        public Builder setRuleId(String ruleId) {
+        public Builder setRuleId(Long ruleId) {
             this.ruleId = ruleId;
             return this;
         }

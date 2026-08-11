@@ -10,8 +10,8 @@ import za.ac.cput.util.Helper;
 
 public class CompatibillityRuleFactory {
 
-    public static CompatibilityRule createCompatibilityRule(String ruleId, String componentType1, String description, String ruledescription) {
-        if (Helper.isNullOrEmpty(ruleId) || Helper.isNullOrEmpty(componentType1) || Helper.isNullOrEmpty(description) || Helper.isNullOrEmpty(ruledescription)) {
+    public static CompatibilityRule createCompatibilityRule(Long ruleId, String componentType1, String description, String ruledescription) {
+        if (Helper.isNullOrEmpty(componentType1) || Helper.isNullOrEmpty(description) || Helper.isNullOrEmpty(ruledescription)) {
             return null;
         }
 

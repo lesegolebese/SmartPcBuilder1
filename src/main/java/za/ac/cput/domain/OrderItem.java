@@ -15,7 +15,8 @@ import jakarta.persistence.*;
 public class OrderItem {
 
     @Id
-    private String orderItemId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderItemId;
 
     private int quantity;
     private double unitPrice;
@@ -38,7 +39,7 @@ public class OrderItem {
         this.product = builder.product;
     }
 
-    public String getOrderItemId() {
+    public Long getOrderItemId() {
         return orderItemId;
     }
 
@@ -68,13 +69,13 @@ public class OrderItem {
     }
 
     public static class Builder {
-        private String orderItemId;
+        private Long orderItemId;
         private int quantity;
         private double unitPrice;
         private Order order;
         private Product product;
 
-        public Builder setOrderItemId(String orderItemId) {
+        public Builder setOrderItemId(Long orderItemId) {
             this.orderItemId = orderItemId;
             return this;
         }

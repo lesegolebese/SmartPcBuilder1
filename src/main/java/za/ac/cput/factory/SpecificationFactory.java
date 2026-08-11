@@ -6,17 +6,17 @@ import za.ac.cput.util.Helper;
 public class SpecificationFactory {
 
     public static Specification createSpecification(Long specificationId,
-                                                    String key,
-                                                    String value) {
+                                                    String specKey,
+                                                    String specValue) {
 
-        if (Helper.isNullOrEmpty(key) || Helper.isNullOrEmpty(value)) {
+        if (Helper.isNullOrEmpty(specKey) || Helper.isNullOrEmpty(specValue)) {
             return null;
         }
 
         return new Specification.Builder()
                 .setSpecificationId(specificationId)
-                .setKey(key)
-                .setValue(value)
+                .setSpecKey(specKey)
+                .setSpecValue(specValue)
                 .build();
     }
 }

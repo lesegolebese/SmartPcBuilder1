@@ -19,17 +19,18 @@ class AddressServiceTest {
     private AddressService service;
 
     private static Address address;
+    private static Long createdAddressId;
 
     @BeforeAll
     static void init() {
         address = AddressFactory.createAddress(
-                2L,
+                null,
                 "99 Loop St",
                 "Central Business District",
                 "Cape Town",
-                "Western Cape",  // Province
-                "8000",          // Postal Code (Added)
-                "South Africa"   // Country (Added)
+                "Western Cape",
+                "8000",
+                "South Africa"
         );
         assertNotNull(address);
     }
@@ -39,13 +40,14 @@ class AddressServiceTest {
     void testCreate() {
         Address created = service.create(address);
         assertNotNull(created);
+        createdAddressId = created.getAddressId();
         System.out.println("Service Created Address: " + created);
     }
 
     @Test
     @Order(2)
     void testRead() {
-        Address read = service.read(address.getAddressId());
+        Address read = service.read(createdAddressId);
         assertNotNull(read);
         System.out.println("Service Read Address: " + read);
     }
@@ -53,7 +55,7 @@ class AddressServiceTest {
     @Test
     @Order(3)
     void testUpdate() {
-        Address updatedAddress = new Address.Builder().copy(address).setStreetName("101 Loop St").build();
+        Address updatedAddress = new Address.Builder().copy(address).setAddressId(createdAddressId).setStreetName("101 Loop St").build();
         Address updated = service.update(updatedAddress);
         assertNotNull(updated);
         assertEquals("101 Loop St", updated.getStreetName());
@@ -72,9 +74,9 @@ class AddressServiceTest {
     @Test
     @Order(5)
     void testDelete() {
-        boolean deleted = service.delete(address.getAddressId());
+        boolean deleted = service.delete(createdAddressId);
         assertTrue(deleted);
-        Address read = service.read(address.getAddressId());
+        Address read = service.read(createdAddressId);
         assertNull(read);
         System.out.println("Address successfully deleted from Service context.");
     }

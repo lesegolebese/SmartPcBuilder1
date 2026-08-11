@@ -18,7 +18,7 @@ public class AddressFactory {
     // 💡 Added String postalCode and String country to the parameters list below
     public static Address createAddress(Long addressId, String streetName, String suburb, String city, String province, String postalCode, String country) {
 
-        if (addressId == null || Helper.isNullOrEmpty(streetName) || Helper.isNullOrEmpty(city) || Helper.isNullOrEmpty(postalCode) || Helper.isNullOrEmpty(country)) {
+        if (Helper.isNullOrEmpty(streetName) || Helper.isNullOrEmpty(city) || Helper.isNullOrEmpty(postalCode) || Helper.isNullOrEmpty(country)) {
             return null;
         }
 

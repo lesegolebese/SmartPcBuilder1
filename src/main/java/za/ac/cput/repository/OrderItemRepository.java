@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.OrderItem;
 
 @Repository
-public interface OrderItemRepository extends JpaRepository<OrderItem, String> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 }

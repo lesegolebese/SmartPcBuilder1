@@ -19,11 +19,12 @@ class CompatibillityRuleControllerTest {
 
     private static final String BASE_URL = "/compatibilityrule";
     private static CompatibilityRule rule;
+    private static Long createdRuleId;
 
     @BeforeAll
     static void init() {
         rule = CompatibillityRuleFactory.createCompatibilityRule(
-                "RULE001",
+                null,
                 "GPU",
                 "RTX 4090 compatibility",
                 "Compatible with 850W+ PSU"
@@ -38,13 +39,15 @@ class CompatibillityRuleControllerTest {
         ResponseEntity<CompatibilityRule> response = restTemplate.postForEntity(url, rule, CompatibilityRule.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
+        createdRuleId = response.getBody().getRuleId();
+        rule = response.getBody();
         System.out.println("Created Rule: " + response.getBody());
     }
 
     @Test
     @Order(2)
     void testRead() {
-        String url = BASE_URL + "/read/" + rule.getRuleId();
+        String url = BASE_URL + "/read/" + createdRuleId;
         ResponseEntity<CompatibilityRule> response = restTemplate.getForEntity(url, CompatibilityRule.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -55,7 +58,7 @@ class CompatibillityRuleControllerTest {
     @Order(3)
     void testUpdate() {
         String url = BASE_URL + "/update";
-        CompatibilityRule updated = new CompatibilityRule.Builder().copy(rule).setDescription("Updated description").build();
+        CompatibilityRule updated = new CompatibilityRule.Builder().copy(rule).setRuleId(createdRuleId).setDescription("Updated description").build();
         HttpEntity<CompatibilityRule> entity = new HttpEntity<>(updated);
         ResponseEntity<CompatibilityRule> response = restTemplate.exchange(url, HttpMethod.PUT, entity, CompatibilityRule.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -88,7 +91,7 @@ class CompatibillityRuleControllerTest {
     @Test
     @Order(6)
     void testFindByDescription() {
-        String url = BASE_URL + "/description/" + rule.getDescription();
+        String url = BASE_URL + "/description/Updated description";
         ResponseEntity<CompatibilityRule[]> response = restTemplate.getForEntity(url, CompatibilityRule[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -109,7 +112,7 @@ class CompatibillityRuleControllerTest {
     @Test
     @Order(8)
     void testDelete() {
-        String url = BASE_URL + "/delete/" + rule.getRuleId();
+        String url = BASE_URL + "/delete/" + createdRuleId;
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.DELETE, null, Boolean.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(Boolean.TRUE.equals(response.getBody()));

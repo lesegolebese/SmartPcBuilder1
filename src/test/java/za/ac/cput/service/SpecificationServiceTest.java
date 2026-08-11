@@ -51,13 +51,13 @@ class SpecificationServiceTest {
     void testUpdate() {
         Specification updatedSpecification = new Specification.Builder()
                 .copy(specification)
-                .setValue("32GB DDR5")
+                .setSpecValue("32GB DDR5")
                 .build();
 
         Specification updated = service.update(updatedSpecification);
 
         assertNotNull(updated);
-        assertEquals("32GB DDR5", updated.getValue());
+        assertEquals("32GB DDR5", updated.getSpecValue());
     }
 
     @Test

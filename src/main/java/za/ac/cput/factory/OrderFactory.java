@@ -14,7 +14,7 @@ public class OrderFactory {
 
     public static Order createOrder(Long orderId, LocalDate orderDate, String status) {
 
-        if (orderId == null || orderDate == null || Helper.isNullOrEmpty(status)) {
+        if (orderDate == null || Helper.isNullOrEmpty(status)) {
             return null;
         }
 
