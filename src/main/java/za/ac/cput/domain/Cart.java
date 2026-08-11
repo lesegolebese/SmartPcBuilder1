@@ -5,10 +5,17 @@
 
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "carts")
 public class Cart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
+
+    @Column(name = "created_date", nullable = false)
     private LocalDate createdDate;
 
     protected Cart() {}

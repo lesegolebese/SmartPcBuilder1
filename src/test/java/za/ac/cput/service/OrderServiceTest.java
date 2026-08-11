@@ -3,7 +3,6 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.Order;
 import za.ac.cput.factory.OrderFactory;
 
 import java.time.LocalDate;
@@ -18,7 +17,7 @@ class OrderServiceTest {
     @Autowired
     private OrderService service;
 
-    private static Order order;
+    private static za.ac.cput.domain.Order order;
 
     @BeforeAll
     static void init() {
@@ -33,7 +32,7 @@ class OrderServiceTest {
     @Test
     @org.junit.jupiter.api.Order(1)
     void testCreate() {
-        Order created = service.create(order);
+        za.ac.cput.domain.Order created = service.create(order);
         assertNotNull(created);
         System.out.println("Service Created Order: " + created);
     }
@@ -41,7 +40,7 @@ class OrderServiceTest {
     @Test
     @org.junit.jupiter.api.Order(2)
     void testRead() {
-        Order read = service.read(order.getOrderId());
+        za.ac.cput.domain.Order read = service.read(order.getOrderId());
         assertNotNull(read);
         System.out.println("Service Read Order: " + read);
     }
@@ -49,12 +48,12 @@ class OrderServiceTest {
     @Test
     @org.junit.jupiter.api.Order(3)
     void testUpdate() {
-        Order updatedOrder = new Order.Builder()
+        za.ac.cput.domain.Order updatedOrder = new za.ac.cput.domain.Order.Builder()
                 .copy(order)
                 .setStatus("Completed")
                 .build();
 
-        Order updated = service.update(updatedOrder);
+        za.ac.cput.domain.Order updated = service.update(updatedOrder);
 
         assertNotNull(updated);
         assertEquals("Completed", updated.getStatus());
@@ -65,7 +64,7 @@ class OrderServiceTest {
     @Test
     @org.junit.jupiter.api.Order(4)
     void testGetAll() {
-        List<Order> list = service.getAll();
+        List<za.ac.cput.domain.Order> list = service.getAll();
         assertNotNull(list);
         assertTrue(list.size() > 0);
 
@@ -79,7 +78,7 @@ class OrderServiceTest {
 
         assertTrue(deleted);
 
-        Order read = service.read(order.getOrderId());
+        za.ac.cput.domain.Order read = service.read(order.getOrderId());
 
         assertNull(read);
 

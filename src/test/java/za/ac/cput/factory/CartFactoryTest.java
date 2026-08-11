@@ -9,16 +9,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class CartFactoryTest {
     private Cart cart;
 
+    private LocalDate createdDate;
+
+
     @BeforeEach
     void setUp() {
-        cart = CartFactory.createCart(1L, LocalDate.now());
+        createdDate = LocalDate.now();
+        cart = CartFactory.createCart(1L, createdDate);
     }
 
     @Test
     void testCreateCart() {
         assertNotNull(cart);
         assertEquals(1L, cart.getCartId());
-        assertEquals(LocalDate.now(), cart.getCreatedDate());
+        assertEquals(createdDate, cart.getCreatedDate());
         System.out.println(cart.toString());
     }
 

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
-import za.ac.cput.domain.Order;
 import za.ac.cput.factory.OrderFactory;
 
 import java.time.LocalDate;
@@ -20,7 +19,7 @@ class OrderControllerTest {
     private TestRestTemplate restTemplate;
 
     private static final String BASE_URL = "/order";
-    private static Order order;
+    private static za.ac.cput.domain.Order order;
 
     @BeforeAll
     static void init() {
@@ -37,8 +36,8 @@ class OrderControllerTest {
     @Order(1)
     void testCreate() {
         String url = BASE_URL + "/create";
-        ResponseEntity<Order> response =
-                restTemplate.postForEntity(url, order, Order.class);
+        ResponseEntity<za.ac.cput.domain.Order> response =
+                restTemplate.postForEntity(url, order, za.ac.cput.domain.Order.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -51,8 +50,8 @@ class OrderControllerTest {
     void testRead() {
         String url = BASE_URL + "/read/" + order.getOrderId();
 
-        ResponseEntity<Order> response =
-                restTemplate.getForEntity(url, Order.class);
+        ResponseEntity<za.ac.cput.domain.Order> response =
+                restTemplate.getForEntity(url, za.ac.cput.domain.Order.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -66,18 +65,18 @@ class OrderControllerTest {
 
         String url = BASE_URL + "/update";
 
-        Order updatedOrder = new Order.Builder()
+        za.ac.cput.domain.Order updatedOrder = new za.ac.cput.domain.Order.Builder()
                 .copy(order)
                 .setStatus("Completed")
                 .build();
 
-        HttpEntity<Order> entity = new HttpEntity<>(updatedOrder);
+        HttpEntity<za.ac.cput.domain.Order> entity = new HttpEntity<>(updatedOrder);
 
-        ResponseEntity<Order> response =
+        ResponseEntity<za.ac.cput.domain.Order> response =
                 restTemplate.exchange(url,
                         HttpMethod.PUT,
                         entity,
-                        Order.class);
+                        za.ac.cput.domain.Order.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -92,8 +91,8 @@ class OrderControllerTest {
 
         String url = BASE_URL + "/getall";
 
-        ResponseEntity<Order[]> response =
-                restTemplate.getForEntity(url, Order[].class);
+        ResponseEntity<za.ac.cput.domain.Order[]> response =
+                restTemplate.getForEntity(url, za.ac.cput.domain.Order[].class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
