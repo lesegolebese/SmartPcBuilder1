@@ -1,5 +1,6 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Specification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long specificationId;
 
+    @Column(name = "spec_key")
     private String key;
     private String value;
 
