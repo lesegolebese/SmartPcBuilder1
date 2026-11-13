@@ -7,7 +7,7 @@ package za.ac.cput.factory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.Order;
+import za.ac.cput.domain.ordering.Order;
 
 import java.time.LocalDate;
 

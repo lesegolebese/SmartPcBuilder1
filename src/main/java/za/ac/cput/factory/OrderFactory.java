@@ -5,7 +5,7 @@
  */
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.Order;
+import za.ac.cput.domain.ordering.Order;
 import za.ac.cput.util.Helper;
 
 import java.time.LocalDate;

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
-import za.ac.cput.domain.OrderItem;
+import za.ac.cput.domain.ordering.OrderItem;
 import za.ac.cput.factory.OrderItemFactory;
 
 import static org.junit.jupiter.api.Assertions.*;

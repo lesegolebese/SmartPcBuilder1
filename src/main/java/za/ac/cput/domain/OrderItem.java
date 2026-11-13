@@ -1,12 +1,13 @@
 package za.ac.cput.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import za.ac.cput.domain.catalog.Product;
 
 /* OrderItem.java
    OrderItem POJO class
-
    Author: Coben Maistry
-
    Date: 21 June 2026
 */
 
@@ -50,6 +51,7 @@ public class OrderItem {
         return unitPrice;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return order;
     }

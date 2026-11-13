@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
-import za.ac.cput.domain.Order;
+import za.ac.cput.domain.ordering.Order;
 import za.ac.cput.factory.OrderFactory;
 
 import java.time.LocalDate;
@@ -34,7 +34,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @Order(1)
+    @org.junit.jupiter.api.Order(1)
     void testCreate() {
         String url = BASE_URL + "/create";
         ResponseEntity<Order> response =
@@ -47,7 +47,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @Order(2)
+    @org.junit.jupiter.api.Order(2)
     void testRead() {
         String url = BASE_URL + "/read/" + order.getOrderId();
 
@@ -61,7 +61,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @Order(3)
+    @org.junit.jupiter.api.Order(3)
     void testUpdate() {
 
         String url = BASE_URL + "/update";
@@ -87,7 +87,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @Order(4)
+    @org.junit.jupiter.api.Order(4)
     void testGetAll() {
 
         String url = BASE_URL + "/getall";
@@ -102,7 +102,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @Order(5)
+    @org.junit.jupiter.api.Order(5)
     void testDelete() {
 
         String url = BASE_URL + "/delete/" + order.getOrderId();

@@ -3,7 +3,7 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.OrderItem;
+import za.ac.cput.domain.ordering.OrderItem;
 import za.ac.cput.factory.OrderItemFactory;
 
 import java.util.List;

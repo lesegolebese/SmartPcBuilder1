@@ -5,7 +5,7 @@
  */
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.OrderItem;
+import za.ac.cput.domain.ordering.OrderItem;
 import za.ac.cput.util.Helper;
 
 public class OrderItemFactory {
